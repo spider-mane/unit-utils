@@ -15,7 +15,7 @@ trait GeneratorTrait
      * Returns a callable that when invoked randomly selects a provided
      * generator to invoke in turn.
      */
-    protected static function generatorRandomizer(callable ...$generators): callable
+    protected function generatorRandomizer(callable ...$generators): callable
     {
         return fn () => ($generators[array_rand($generators)])();
     }
@@ -26,7 +26,7 @@ trait GeneratorTrait
      *
      * @return list<mixed>
      */
-    protected static function dummyList(callable $generator, int $count = 10): array
+    protected function dummyList(callable $generator, int $count = 10): array
     {
         return array_map(fn () => $generator(), range(1, $count));
     }
@@ -35,7 +35,7 @@ trait GeneratorTrait
      * Create an associative array using a callback to generate entries with
      * keys derived from a provided list.
      */
-    protected static function dummyMap(callable $generator, array $keys): array
+    protected function dummyMap(callable $generator, array $keys): array
     {
         return array_map(fn () => $generator(), array_flip($keys));
     }
@@ -44,9 +44,9 @@ trait GeneratorTrait
      * Create an associative array of specified count using callbacks to
      * generate both keys and entries.
      */
-    protected static function dummyAutoKeyedMap(callable $keyGen, callable $valueGen, int $count = 10): array
+    protected function dummyAutoKeyedMap(callable $keyGen, callable $valueGen, int $count = 10): array
     {
-        return static::dummyMap($valueGen, static::dummyList($keyGen, $count));
+        return $this->dummyMap($valueGen, $this->dummyList($keyGen, $count));
     }
 
     /**
@@ -57,7 +57,7 @@ trait GeneratorTrait
      *
      * @return ArrayAccess&Traversable&callable(int|string $item): mixed
      */
-    protected static function valueFactory(callable $generator): callable
+    protected function valueFactory(callable $generator): callable
     {
         return new ValueFactory($generator);
     }
@@ -70,9 +70,9 @@ trait GeneratorTrait
      *
      * @return callable(int $count): Generator
      */
-    protected static function valueGenerator(callable $generator): callable
+    protected function valueGenerator(callable $generator): callable
     {
-        return static function (int $count) use ($generator): Generator {
+        return function (int $count) use ($generator): Generator {
             for ($i = 0; $i < $count; $i++) {
                 yield $generator();
             }
