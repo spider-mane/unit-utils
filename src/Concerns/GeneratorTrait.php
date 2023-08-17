@@ -6,8 +6,8 @@ namespace WebTheory\UnitUtils\Concerns;
 
 use ArrayAccess;
 use Generator;
-use WebTheory\UnitUtils\LIb\ValueFactory;
 use Traversable;
+use WebTheory\UnitUtils\LIb\ValueFactory;
 
 trait GeneratorTrait
 {

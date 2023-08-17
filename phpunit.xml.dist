@@ -22,7 +22,7 @@
 >
   <testsuites>
     <testsuite name="unit">
-      <directory>tests/Suites/Unit</directory>
+      <directory>tests</directory>
     </testsuite>
   </testsuites>
 

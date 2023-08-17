@@ -2,11 +2,11 @@
 
 namespace WebTheory\UnitUtils\Doubles;
 
-use WebTheory\UnitUtils\Concerns\FakerTrait;
+use WebTheory\UnitUtils\Concerns\FakeGeneratorTrait;
 
 abstract class AbstractStub
 {
-    use FakerTrait;
+    use FakeGeneratorTrait;
 
     public function __construct()
     {
