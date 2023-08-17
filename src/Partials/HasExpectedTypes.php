@@ -2,6 +2,7 @@
 
 namespace WebTheory\UnitUtils\Partials;
 
+use PHPUnit\Framework\Assert;
 use WebTheory\UnitUtils\Concerns\FormattedDataSetsTrait;
 
 trait HasExpectedTypes
@@ -14,7 +15,7 @@ trait HasExpectedTypes
      */
     public function it_is_implementation_of_expected_types(string $type)
     {
-        $this->assertInstanceOf($type, $this->sut);
+        Assert::assertInstanceOf($type, $this->sut);
     }
 
     public function expectedTypesData(): array
